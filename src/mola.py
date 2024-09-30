@@ -38,7 +38,6 @@ class CustomPenaltyOptimization:
         violations = [violation if violation > 0 else 0 for violation in violations]
 
         V = (x1 + 2) * x2 * x3**2
-
         return V, violations  # Certifique-se de que o valor de V é o primeiro item retornado
 
     # Função de penalização personalizada
@@ -54,7 +53,7 @@ class CustomPenaltyOptimization:
             if solucoes_viaveis:
                 f_max = max([objetivo(sol) for sol in solucoes_viaveis])
             else:
-                f_max = 10000  # Um valor alto padrão se nenhuma solução viável estiver presente
+                f_max = 100000  # Um valor alto padrão se nenhuma solução viável estiver presente
             
             # Soma das penalidades das violações das restrições
             penalidade = sum([abs(g(x)) if g(x) < 0 else 0 for g in restricoes])
@@ -116,7 +115,6 @@ class CustomPenaltyOptimization:
 
             best_solution = model.g_best.solution
             best_fitness = model.g_best.target.fitness
-
             # Armazenar os valores de V para a melhor solução
             V_best, _ = self.funcao_objetivo(best_solution)
             results.append(V_best)
@@ -141,7 +139,7 @@ def main():
     model_classes = {"GA": GA.BaseGA, "PSO": PSO.OriginalPSO}
 
     # Interface gráfica
-    st.title("Otimização de GA e PSO com Restrições")
+    st.title("Otimização de GA e PSO com Restrições (Kalyanmoy Deb)")
     st.sidebar.title("Configurações")
 
     with st.sidebar:
